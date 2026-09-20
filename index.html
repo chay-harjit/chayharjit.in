@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Chay Harjit — AI builder and ethical hacker." />
+  <meta name="author" content="Chay Harjit" />
+  <link rel="canonical" href="https://chayharjit.in/" />
+  
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://chayharjit.in/" />
+  <meta property="og:title" content="Chay Harjit — AI Builder & Ethical Hacker" />
+  <meta property="og:description" content="Chay Harjit — AI builder and ethical hacker." />
+  <meta property="og:image" content="https://chayharjit.in/materials/img1.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://chayharjit.in/" />
+  <meta name="twitter:title" content="Chay Harjit — AI Builder & Ethical Hacker" />
+  <meta name="twitter:description" content="Chay Harjit — AI builder and ethical hacker." />
+  <meta name="twitter:image" content="https://chayharjit.in/materials/img1.png" />
+
+  <title>Chay Harjit</title>
+  <link rel="icon" type="image/png" href="materials/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Open+Sans:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div id="preloader" class="preloader">
+    <div class="preloader-name">Chay Harjit</div>
+  </div>
+  <canvas id="scroll-canvas" aria-hidden="true"></canvas>
+
+  <main class="site-shell" id="top">
+    <nav class="topbar" aria-label="Main navigation">
+      <span class="wordmark" role="button" tabindex="0" aria-label="Chay Harjit home">chayharjit</span>
+    </nav>
+
+    <section class="hero-card" aria-labelledby="hero-title">
+      <div class="hero-image" role="img" aria-label="Portrait of Chay Harjit"></div>
+      <video class="hero-video" autoplay loop muted playsinline poster="materials/img1.png" aria-hidden="true">
+        <source src="materials/vid1.mp4" type="video/mp4">
+      </video>
+      <div class="hero-wash"></div>
+      <div class="hero-content">
+        <h1 id="hero-title">Hello, I’m<br /><em>Chay Harjit.</em></h1>
+        <div class="hero-bottom">
+          <p class="role">AI Builder <span>×</span> Ethical Hacker</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-card" id="about" aria-labelledby="about-title">
+      <div class="about-heading">
+        <p class="eyebrow">A little context</p>
+        <h2 id="about-title">About<br /><em>Me</em></h2>
+      </div>
+      <div class="about-copy">
+        <span class="about-rule" aria-hidden="true"></span>
+        <div class="about-copy-content">
+          <p>I'm Chay Harjit, a Grade 9 student at Hayagrivas International School, exploring Artificial Intelligence through Raam TechLink. I enjoy building useful AI projects and learning how cybersecurity can be made more thoughtful and effective.</p>
+          <div class="about-facts" aria-label="Profile facts">
+            <span><strong>01</strong> Student builder</span>
+            <span><strong>02</strong> AI explorer</span>
+            <span><strong>03</strong> Security minded</span>
+          </div>
+        </div>
+      </div>
+      <figure class="about-portrait">
+        <img src="materials/img1.png" alt="Portrait of Chay Harjit" />
+      </figure>
+    </section>
+
+    <section class="projects-card" id="projects" aria-labelledby="projects-title">
+      <div class="projects-panel" aria-hidden="true"></div>
+      <h2 id="projects-title">Projects</h2>
+    </section>
+
+    <section class="fourth-card" aria-labelledby="learnsub-title">
+      <div class="project-stack">
+      <article class="learnsub-box project-box is-visible">
+        <div class="learnsub-heading">
+          <p class="learnsub-label">Education · AI platform</p>
+          <h2 id="learnsub-title">LearnSub</h2>
+          <p class="learnsub-lead">AI-powered personalized learning for every student, in every language.</p>
+        </div>
+        <div class="learnsub-details">
+          <div class="learnsub-section">
+            <h3>Core problem</h3>
+            <p>When students miss school, they can lose foundational concepts and fall further behind, especially without tutors or when learning in a non-native language.</p>
+          </div>
+          <div class="learnsub-section">
+            <h3>Key features</h3>
+            <ul>
+              <li>Upload PDFs, videos, or notes for automatic concept extraction</li>
+              <li>Adaptive quizzes with instant feedback</li>
+              <li>Study across 100+ languages</li>
+              <li>Real-time AI chat tutor and progress dashboards</li>
+            </ul>
+          </div>
+          <div class="learnsub-section learnsub-value">
+            <h3>Unique value</h3>
+            <p>Purpose-built educational AI with true personalization, language-first design, and one web-based platform that scales from individual learners to institutions.</p>
+          </div>
+        </div>
+      </article>
+      <article class="conduct-box project-box" aria-labelledby="conduct-title">
+        <div class="conduct-heading">
+          <p class="conduct-label">Machine learning · Student wellbeing</p>
+          <h2 id="conduct-title">Conduct AI</h2>
+          <p class="conduct-lead">ML-powered student behavior assessment for earlier, more informed support.</p>
+        </div>
+        <div class="conduct-details">
+          <div class="conduct-section">
+            <h3>The problem</h3>
+            <p>Social disengagement, declining academic behavior, and sudden changes are often missed by traditional monitoring, delaying intervention.</p>
+          </div>
+          <div class="conduct-section">
+            <h3>Solution overview</h3>
+            <ul>
+              <li>Behavioral risk prediction from 15 key features</li>
+              <li>XGBoost classification for risk levels</li>
+              <li>Interactive assessment interface for real-time evaluation</li>
+            </ul>
+          </div>
+          <div class="conduct-section">
+            <h3>Engineering highlights</h3>
+            <p>Balanced data, engineered features, and optimized training for stronger performance. Robust session state keeps the assessment experience smooth and reliable.</p>
+          </div>
+        </div>
+        <div class="conduct-capabilities"><span>Live completion tracking</span><span>Low / Medium / High</span><span>Visual decision support</span></div>
+      </article>
+      <article class="agro-box project-box" aria-labelledby="agro-title">
+        <div class="agro-heading">
+          <p class="agro-label">Agriculture · Responsible AI</p>
+          <h2 id="agro-title">Agrochemicals Predictor</h2>
+          <p class="agro-lead">AI-powered fertilizer recommendations for safer, smarter, and more sustainable agriculture.</p>
+        </div>
+        <div class="agro-details">
+          <div class="agro-section">
+            <h3>The challenge</h3>
+            <p>Improper fertilizer and pesticide use can create health risks, pollute soil and water, reduce fertility, and affect crop yields. Farmers often lack precise, data-driven guidance.</p>
+          </div>
+          <div class="agro-section">
+            <h3>Objective</h3>
+            <p>Predict safe and optimal fertilizer dosages from crop type, growth stage, soil properties, and environmental conditions.</p>
+          </div>
+          <div class="agro-section">
+            <h3>Recommendation inputs</h3>
+            <ul>
+              <li>Crop type and growth stage</li>
+              <li>Soil type, pH, moisture, and nutrient levels</li>
+              <li>Temperature, humidity, and rainfall</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+      <article class="xaminr-box project-box" aria-labelledby="xaminr-title">
+        <div class="xaminr-heading">
+          <p class="xaminr-label">Education · AI Assessment</p>
+          <h2 id="xaminr-title">Xaminr</h2>
+          <p class="xaminr-lead">Introducing Xaminr - an AI-powered exam correction tool.</p>
+        </div>
+        <div class="xaminr-details">
+          <div class="xaminr-section">
+            <h3>How it works</h3>
+            <ul>
+              <li>Teacher uploads the Answer Key</li>
+              <li>Teacher uploads the Student's Paper</li>
+              <li>AI reads, evaluates, and corrects instantly</li>
+            </ul>
+          </div>
+          <div class="xaminr-section">
+            <h3>Results in seconds</h3>
+            <ul>
+              <li>Marks & Percentage</li>
+              <li>Grade (A/B/C/D/F)</li>
+              <li>Pass / Fail</li>
+            </ul>
+          </div>
+          <div class="xaminr-section">
+            <h3>Detailed Feedback</h3>
+            <ul>
+              <li>Question-by-question feedback</li>
+              <li>Strengths & areas to improve</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+      </div>
+    </section>
+
+    <section class="skills-card" id="skills" aria-labelledby="skills-title">
+      <div class="skills-intro">
+        <p class="eyebrow">What I work with</p>
+        <h2 id="skills-title">Skills</h2>
+        <p>Curiosity across intelligent systems, security, and the tools that make ideas real.</p>
+        <div class="skills-meta"><span>8 disciplines</span><span>3 practice areas</span></div>
+      </div>
+      <div class="skills-groups">
+        <div class="skill-group">
+          <p class="skill-group-label">Intelligence</p>
+          <div class="skill-list"><span>Artificial Intelligence</span><span>Machine Learning</span><span>AI Agents</span></div>
+        </div>
+        <div class="skill-group">
+          <p class="skill-group-label">Security</p>
+          <div class="skill-list"><span>Ethical Hacking</span><span>Cyber Security</span></div>
+        </div>
+        <div class="skill-group">
+          <p class="skill-group-label">Tools & systems</p>
+          <div class="skill-list"><span>Python</span><span>Linux</span><span>Kali Linux</span></div>
+        </div>
+        <div class="skill-group">
+          <p class="skill-group-label">Creative</p>
+          <div class="skill-list"><span>Designer</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="certificates-card" id="certificates" aria-labelledby="certificates-title">
+      <div class="certificates-heading">
+        <div>
+          <p class="eyebrow">Proof of practice</p>
+          <h2 id="certificates-title">Certificates<br /><em>& Achievements</em></h2>
+        </div>
+        <div class="certificates-side-note"><p>Learning milestones, technical certifications, and moments worth remembering.</p></div>
+      </div>
+      <div class="certificate-grid">
+        <figure class="certificate-item certificate-wide"><img src="materials/img2.png" alt="Malware Analysis achievement" /><figcaption><span>01</span> Malware Analysis</figcaption></figure>
+        <figure class="certificate-item certificate-wide"><img src="materials/img3.png" alt="Python Basics achievement" /><figcaption><span>02</span> Python Basics</figcaption></figure>
+        <figure class="certificate-item"><img src="materials/img4.jpg" alt="Young Minds of Year Award first place certificate" /><figcaption><span>03</span> Young Minds of Year Award - 1st Place</figcaption></figure>
+        <figure class="certificate-item"><img src="materials/img5.jpg" alt="AI for Business certificate" /><figcaption><span>04</span> AI for Business</figcaption></figure>
+        <figure class="certificate-item"><img src="materials/img6.jpg" alt="Advanced Python and Machine Learning concepts certificate" /><figcaption><span>05</span> Advanced Python and Machine Learning concepts</figcaption></figure>
+        <figure class="certificate-item"><img src="materials/img7.png" alt="Young Minds Tech Feast first place award" /><figcaption><span>06</span> Young Minds Tech Feast - 1st Place</figcaption></figure>
+        <figure class="certificate-item"><img src="materials/img8.png" alt="Security Milestones achievement" /><figcaption><span>07</span> Security Milestones</figcaption></figure>
+        <figure class="certificate-item"><img src="materials/img9.png" alt="SOC Alert Triaging achievement" /><figcaption><span>08</span> SOC Alert Triaging</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="terminal-card" id="terminal" aria-label="Terminal">
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-buttons">
+            <span class="terminal-button red"></span>
+            <span class="terminal-button yellow"></span>
+            <span class="terminal-button green"></span>
+          </div>
+          <span class="terminal-title">root@chay:~</span>
+        </div>
+        <div class="terminal-body" id="terminal-typewriter">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-card" id="contact" aria-labelledby="contact-title">
+      <div class="contact-heading">
+        <p class="contact-kicker">Get in touch</p>
+        <h2 id="contact-title">Contact<br /><em>me.</em></h2>
+      </div>
+      <div class="contact-links" aria-label="Contact information">
+        <a class="contact-link-card" href="https://github.com/chay-harjit" target="_blank" rel="noreferrer" aria-label="GitHub: chay-harjit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.71c-2.78.61-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.54 1.04 1.54 1.04.9 1.54 2.35 1.09 2.92.84.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.35 4.7-4.58 4.95.36.31.68.9.68 1.82v2.7c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" /></svg><span>chay-harjit</span></a>
+        <a class="contact-link-card" href="https://www.linkedin.com/in/chayharjit" target="_blank" rel="noreferrer" aria-label="LinkedIn: chayharjit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 2H3.55A1.55 1.55 0 0 0 2 3.55v16.9A1.55 1.55 0 0 0 3.55 22h16.9A1.55 1.55 0 0 0 22 20.45V3.55A1.55 1.55 0 0 0 20.45 2ZM8.1 18.88H5.12V9.3H8.1Zm-1.49-10.9a1.73 1.73 0 1 1 0-3.46 1.73 1.73 0 0 1 0 3.46Zm12.3 10.9h-2.97v-4.66c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.74H9.63V9.3h2.85v1.31h.04a3.13 3.13 0 0 1 2.82-1.55c3.01 0 3.57 1.98 3.57 4.56Z" /></svg><span>chayharjit</span></a>
+        <a class="contact-link-card" href="https://x.com/chayharjit" target="_blank" rel="noreferrer" aria-label="X: chayharjit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2h3.68l-8.04 9.19L24 22h-7.41l-5.8-7.59L4.15 22H.46l8.6-9.83L0 2h7.6l5.24 6.93L18.9 2Zm-1.3 18h2.04L6.5 3.9H4.31L17.6 20Z" /></svg><span>chayharjit</span></a>
+        <a class="contact-link-card" href="mailto:chayharjit@outlook.com" aria-label="Email: chayharjit@outlook.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3V5Zm2 2v.51l7 4.67 7-4.67V7l-7 4.67L5 7Zm14 10V9.91l-7 4.67-7-4.67V17h14Z" /></svg><span>chayharjit@outlook.com</span></a>
+      </div>
+    </section>
+
+    <footer class="footer-card" aria-label="Site footer">
+      <div class="footer-shade" aria-hidden="true"></div>
+      <span class="footer-brand" role="button" tabindex="0" aria-label="Chay Harjit home">chayharjit</span>
+      <div class="footer-message"><p>Craft Future</p><h2>Build Your Own<br /><em>Products.</em></h2></div>
+      <div class="footer-bottom">
+        <p>© 2026 Chay Harjit. All rights reserved.</p>
+        <div class="footer-socials" aria-label="Social links">
+          <a href="https://github.com/chay-harjit" target="_blank" rel="noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.71c-2.78.61-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.54 1.04 1.54 1.04.9 1.54 2.35 1.09 2.92.84.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.35 4.7-4.58 4.95.36.31.68.9.68 1.82v2.7c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" /></svg></a>
+          <a href="https://www.linkedin.com/in/chayharjit" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 2H3.55A1.55 1.55 0 0 0 2 3.55v16.9A1.55 1.55 0 0 0 3.55 22h16.9A1.55 1.55 0 0 0 22 20.45V3.55A1.55 1.55 0 0 0 20.45 2ZM8.1 18.88H5.12V9.3H8.1Zm-1.49-10.9a1.73 1.73 0 1 1 0-3.46 1.73 1.73 0 0 1 0 3.46Zm12.3 10.9h-2.97v-4.66c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.74H9.63V9.3h2.85v1.31h.04a3.13 3.13 0 0 1 2.82-1.55c3.01 0 3.57 1.98 3.57 4.56Z" /></svg></a>
+          <a href="https://x.com/chayharjit" target="_blank" rel="noreferrer" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2h3.68l-8.04 9.19L24 22h-7.41l-5.8-7.59L4.15 22H.46l8.6-9.83L0 2h7.6l5.24 6.93L18.9 2Zm-1.3 18h2.04L6.5 3.9H4.31L17.6 20Z" /></svg></a>
+          <a href="mailto:chayharjit@outlook.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3V5Zm2 2v.51l7 4.67 7-4.67V7l-7 4.67L5 7Zm14 10V9.91l-7 4.67-7-4.67V17h14Z" /></svg></a>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+</body>
+</html>
