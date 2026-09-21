@@ -156,6 +156,7 @@ if (window.THREE && document.getElementById('scroll-canvas') && !window.matchMed
 }
 
 function updateProjectsReveal() {
+  if (!projectsCard || !skillsCard) return;
   const bounds = projectsCard.getBoundingClientRect();
   const progress = Math.min(1, Math.max(0, (window.innerHeight - bounds.top) / bounds.height));
   const skillsEntering = skillsCard.getBoundingClientRect().top < window.innerHeight * 0.6;
@@ -169,6 +170,7 @@ function updateProjectsReveal() {
 }
 
 function updateSkillsTransition() {
+  if (!skillsCard) return;
   const bounds = skillsCard.getBoundingClientRect();
   const progress = Math.min(1, Math.max(0, (window.innerHeight - bounds.top) / window.innerHeight));
   skillsCard.style.setProperty('--skill-progress', progress.toFixed(3));
@@ -197,12 +199,24 @@ if (footerCard) {
   footerObserver.observe(footerCard);
 }
 
-document.querySelectorAll('.wordmark, .footer-brand').forEach(link => {
-  link.addEventListener('click', (e) => {
+document.querySelectorAll('.nav-links a').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const targetPath = this.getAttribute('href');
+    
+    try {
+      history.pushState(null, null, targetPath);
+    } catch (err) {}
+    
+    const targetId = targetPath.substring(1);
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
   });
 });
+
+
 
 // Lightbox Gallery for Certificates
 const certificateItems = document.querySelectorAll('.certificate-item');
