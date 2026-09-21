@@ -1,3 +1,14 @@
+const topbar = document.querySelector('.topbar');
+const updateTopbar = () => {
+  if (window.scrollY > 40) {
+    topbar.classList.add('is-scrolled');
+  } else {
+    topbar.classList.remove('is-scrolled');
+  }
+};
+window.addEventListener('scroll', updateTopbar, { passive: true });
+updateTopbar();
+
 window.addEventListener('load', () => {
   const preloader = document.getElementById('preloader');
   if (preloader) {
@@ -193,130 +204,64 @@ document.querySelectorAll('.wordmark, .footer-brand').forEach(link => {
   });
 });
 
-const terminalCard = document.getElementById('terminal');
-if (terminalCard) {
-  const terminalObserver = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting && !terminalCard.dataset.started) {
-      terminalCard.dataset.started = 'true';
-      startTerminalAnimation();
-    }
-  }, { threshold: 0.5 });
-  terminalObserver.observe(terminalCard);
-}
+// Lightbox Gallery for Certificates
+const certificateItems = document.querySelectorAll('.certificate-item');
+const lightbox = document.getElementById('lightbox');
+if (certificateItems.length > 0 && lightbox) {
+  const lbImg = lightbox.querySelector('.lightbox-img');
+  const lbCaption = lightbox.querySelector('.lightbox-caption');
+  const btnClose = lightbox.querySelector('.lightbox-close');
+  const btnPrev = lightbox.querySelector('.lightbox-prev');
+  const btnNext = lightbox.querySelector('.lightbox-next');
+  let currentIndex = 0;
 
-async function startTerminalAnimation() {
-  const container = document.getElementById('terminal-typewriter');
-  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-  
-  const commands = [
-    { cmd: "whoami", out: "chayharjit" },
-    { cmd: "cat bio.md", out: "Ethical hacker and AI builder. Crafting the future with secure, intelligent systems." },
-    { cmd: "cat skills.txt", out: "Artificial Intelligence, Cyber Security, Machine Learning, Python, Linux" },
-    { cmd: "cat projects.md", out: "LearnSub, Conduct AI, Agrochemicals Predictor, Xaminr" },
-    { cmd: "cat contact.md", out: "GitHub: chay-harjit | LinkedIn: chayharjit | X: chayharjit" }
-  ];
-  
-  for (let i = 0; i < commands.length; i++) {
-    const line = document.createElement('div');
-    line.className = 'terminal-line';
-    line.innerHTML = `<span class="terminal-prompt">root@chay:~#</span> <span class="typing-text"></span><span class="terminal-cursor"></span>`;
-    container.appendChild(line);
+  const openLightbox = (index) => {
+    currentIndex = index;
+    const item = certificateItems[index];
+    const img = item.querySelector('img');
+    const caption = item.querySelector('figcaption');
     
-    const textSpan = line.querySelector('.typing-text');
-    const cursor = line.querySelector('.terminal-cursor');
-    
-    for (let char of commands[i].cmd) {
-      textSpan.textContent += char;
-      await delay(Math.random() * 25 + 15);
-    }
-    
-    await delay(200);
-    cursor.style.display = 'none';
-    
-    const outputLine = document.createElement('span');
-    outputLine.className = 'terminal-output';
-    outputLine.textContent = commands[i].out;
-    container.appendChild(outputLine);
-    
-    container.scrollTop = container.scrollHeight;
-    await delay(350);
-  }
-  
-  createInteractivePrompt(container);
-  
-  // Allow clicking anywhere to focus input
-  container.parentElement.addEventListener('click', () => {
-    const input = document.querySelector('.terminal-input');
-    if (input) input.focus();
+    lbImg.src = img.src;
+    lbCaption.innerHTML = caption.innerHTML;
+    lightbox.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    lightbox.classList.remove('is-open');
+    document.body.style.overflow = '';
+  };
+
+  const showNext = (e) => {
+    if (e) e.stopPropagation();
+    currentIndex = (currentIndex + 1) % certificateItems.length;
+    openLightbox(currentIndex);
+  };
+
+  const showPrev = (e) => {
+    if (e) e.stopPropagation();
+    currentIndex = (currentIndex - 1 + certificateItems.length) % certificateItems.length;
+    openLightbox(currentIndex);
+  };
+
+  certificateItems.forEach((item, index) => {
+    item.addEventListener('click', () => openLightbox(index));
   });
-}
 
-function createInteractivePrompt(container) {
-  const line = document.createElement('div');
-  line.className = 'terminal-line terminal-input-wrapper';
-  line.innerHTML = `<span class="terminal-prompt">root@chay:~#</span> <input type="text" class="terminal-input" autocomplete="off" spellcheck="false" autofocus />`;
-  container.appendChild(line);
-  
-  const input = line.querySelector('.terminal-input');
-  input.focus();
-  container.scrollTop = container.scrollHeight;
-  
-  input.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      const val = this.value.trim();
-      
-      // Convert input to static text
-      this.parentElement.innerHTML = `<span class="terminal-prompt">root@chay:~#</span> <span style="color:#00ff00">${this.value}</span>`;
-      
-      if (val) {
-        processCommand(val, container);
-      } else {
-        createInteractivePrompt(container);
-      }
+  btnClose.addEventListener('click', closeLightbox);
+  btnNext.addEventListener('click', showNext);
+  btnPrev.addEventListener('click', showPrev);
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+      closeLightbox();
     }
   });
-}
 
-function processCommand(cmd, container) {
-  const outputLine = document.createElement('span');
-  outputLine.className = 'terminal-output';
-  
-  const args = cmd.split(' ').filter(Boolean);
-  const command = args[0].toLowerCase();
-  
-  const harmful = ['rm', 'sudo', 'su', 'mkfs', 'fdisk', 'reboot', 'shutdown', 'chmod', 'chown', 'del'];
-  
-  if (harmful.includes(command)) {
-    outputLine.textContent = `bash: ${command}: permission denied. Nice try, hacker! 😉`;
-  } else if (command === 'help') {
-    outputLine.textContent = `Available commands: help, whoami, clear, ls, cat, date, echo, pwd`;
-  } else if (command === 'clear') {
-    container.innerHTML = '';
-    createInteractivePrompt(container);
-    return;
-  } else if (command === 'whoami') {
-    outputLine.textContent = 'chayharjit';
-  } else if (command === 'pwd') {
-    outputLine.textContent = '/home/chayharjit';
-  } else if (command === 'ls') {
-    outputLine.textContent = 'bio.md  contact.md  projects.md  skills.txt';
-  } else if (command === 'date') {
-    outputLine.textContent = new Date().toString();
-  } else if (command === 'echo') {
-    outputLine.textContent = args.slice(1).join(' ');
-  } else if (command === 'cat') {
-    const file = args[1];
-    if (!file) outputLine.textContent = 'cat: missing file operand';
-    else if (file === 'bio.md') outputLine.textContent = 'Ethical hacker and AI builder. Crafting the future with secure, intelligent systems.';
-    else if (file === 'skills.txt') outputLine.textContent = 'Artificial Intelligence, Cyber Security, Machine Learning, Python, Linux';
-    else if (file === 'projects.md') outputLine.textContent = 'LearnSub, Conduct AI, Agrochemicals Predictor, Xaminr';
-    else if (file === 'contact.md') outputLine.textContent = 'GitHub: chay-harjit | LinkedIn: chayharjit | X: chayharjit';
-    else outputLine.textContent = `cat: ${file}: No such file or directory`;
-  } else {
-    outputLine.textContent = `bash: ${command}: command not found`;
-  }
-  
-  container.appendChild(outputLine);
-  createInteractivePrompt(container);
+  window.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('is-open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') showNext();
+    if (e.key === 'ArrowLeft') showPrev();
+  });
 }
-
