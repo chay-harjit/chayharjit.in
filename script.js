@@ -15,6 +15,14 @@ window.addEventListener('load', () => {
     setTimeout(() => {
       preloader.style.opacity = '0';
       preloader.style.visibility = 'hidden';
+
+      const path = window.location.pathname.substring(1).replace(/\/$/, '');
+      if (path) {
+        const target = document.getElementById(path);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
     }, 600);
   }
 });
@@ -23,7 +31,7 @@ const heroCard = document.querySelector('.hero-card');
 
 if (heroCard) {
   const heroImage = heroCard.querySelector('.hero-image');
-  
+
   if (heroImage) {
     heroCard.addEventListener('pointermove', (event) => {
       const bounds = heroCard.getBoundingClientRect();
@@ -167,12 +175,12 @@ function updateProjectsReveal() {
   projectsCard.style.setProperty('--reveal', progress.toFixed(3));
   projectsCard.style.setProperty('--project-depth', (progress * 72).toFixed(2) + 'px');
   projectsCard.style.backgroundColor = `rgb(${Math.round(progress * 255)}, ${Math.round(progress * 255)}, ${Math.round(progress * 255)})`;
-  
+
   const heading = projectsCard.querySelector('h2');
   if (heading) {
     heading.style.color = `rgb(${Math.round((1 - progress) * 255)}, ${Math.round((1 - progress) * 255)}, ${Math.round((1 - progress) * 255)})`;
   }
-  
+
   const whiteProjectState = progress >= 0.995 && !skillsEntering;
   document.body.classList.toggle('projects-finished', whiteProjectState);
   document.documentElement.classList.toggle('projects-finished', whiteProjectState);
@@ -214,15 +222,22 @@ document.querySelectorAll('.nav-links a').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
     const targetPath = this.getAttribute('href');
-    
+
     if (!targetPath) return;
 
     try {
-      history.pushState(null, null, targetPath);
-    } catch (err) {}
-    
+      const newUrl = targetPath.startsWith('#') ? '/' + targetPath.substring(1) : targetPath;
+      history.pushState(null, null, newUrl);
+    } catch (err) { }
+
+    let targetId = null;
     if (targetPath.startsWith('#')) {
-      const targetId = targetPath.substring(1);
+      targetId = targetPath.substring(1);
+    } else if (targetPath.startsWith('/')) {
+      targetId = targetPath.substring(1);
+    }
+
+    if (targetId) {
       const target = document.getElementById(targetId);
       if (target) {
         target.scrollIntoView({ behavior: 'smooth' });
@@ -336,8 +351,8 @@ if (linkModal) {
   const closeLinkModal = () => {
     linkModal.classList.remove('is-open');
     document.body.style.overflow = '';
-    setTimeout(() => { 
-      if (linkModalBtn) linkModalBtn.href = '#'; 
+    setTimeout(() => {
+      if (linkModalBtn) linkModalBtn.href = '#';
       if (linkModalSecondaryBtn) linkModalSecondaryBtn.href = '#';
     }, 300);
   };
