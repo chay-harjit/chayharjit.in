@@ -22,16 +22,20 @@ window.addEventListener('load', () => {
 const heroCard = document.querySelector('.hero-card');
 
 if (heroCard) {
-  heroCard.addEventListener('pointermove', (event) => {
-    const bounds = heroCard.getBoundingClientRect();
-    const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
-    const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
-    heroCard.querySelector('.hero-image').style.transform = `scale(1.03) translate(${x * -4}px, ${y * -3}px)`;
-  });
+  const heroImage = heroCard.querySelector('.hero-image');
+  
+  if (heroImage) {
+    heroCard.addEventListener('pointermove', (event) => {
+      const bounds = heroCard.getBoundingClientRect();
+      const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+      const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+      heroImage.style.transform = `scale(1.03) translate(${x * -4}px, ${y * -3}px)`;
+    });
 
-  heroCard.addEventListener('pointerleave', () => {
-    heroCard.querySelector('.hero-image').style.transform = 'scale(1.015)';
-  });
+    heroCard.addEventListener('pointerleave', () => {
+      heroImage.style.transform = 'scale(1.015)';
+    });
+  }
 }
 
 const projectsCard = document.querySelector('.projects-card');
@@ -163,7 +167,12 @@ function updateProjectsReveal() {
   projectsCard.style.setProperty('--reveal', progress.toFixed(3));
   projectsCard.style.setProperty('--project-depth', (progress * 72).toFixed(2) + 'px');
   projectsCard.style.backgroundColor = `rgb(${Math.round(progress * 255)}, ${Math.round(progress * 255)}, ${Math.round(progress * 255)})`;
-  projectsCard.querySelector('h2').style.color = `rgb(${Math.round((1 - progress) * 255)}, ${Math.round((1 - progress) * 255)}, ${Math.round((1 - progress) * 255)})`;
+  
+  const heading = projectsCard.querySelector('h2');
+  if (heading) {
+    heading.style.color = `rgb(${Math.round((1 - progress) * 255)}, ${Math.round((1 - progress) * 255)}, ${Math.round((1 - progress) * 255)})`;
+  }
+  
   const whiteProjectState = progress >= 0.995 && !skillsEntering;
   document.body.classList.toggle('projects-finished', whiteProjectState);
   document.documentElement.classList.toggle('projects-finished', whiteProjectState);
@@ -199,46 +208,56 @@ if (footerCard) {
   footerObserver.observe(footerCard);
 }
 
+
+
 document.querySelectorAll('.nav-links a').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
     const targetPath = this.getAttribute('href');
     
+    if (!targetPath) return;
+
     try {
       history.pushState(null, null, targetPath);
     } catch (err) {}
     
-    const targetId = targetPath.substring(1);
-    const target = document.getElementById(targetId);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+    if (targetPath.startsWith('#')) {
+      const targetId = targetPath.substring(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   });
 });
 
 
 
-// Lightbox Gallery for Certificates
-const certificateItems = document.querySelectorAll('.certificate-item');
+// Lightbox Gallery
 const lightbox = document.getElementById('lightbox');
-if (certificateItems.length > 0 && lightbox) {
+let currentGallery = [];
+let currentIndex = 0;
+
+if (lightbox) {
   const lbImg = lightbox.querySelector('.lightbox-img');
   const lbCaption = lightbox.querySelector('.lightbox-caption');
   const btnClose = lightbox.querySelector('.lightbox-close');
   const btnPrev = lightbox.querySelector('.lightbox-prev');
   const btnNext = lightbox.querySelector('.lightbox-next');
-  let currentIndex = 0;
 
-  const openLightbox = (index) => {
+  window.openLightbox = (items, index = 0) => {
+    if (!items || items.length === 0) return;
+    currentGallery = items;
     currentIndex = index;
-    const item = certificateItems[index];
-    const img = item.querySelector('img');
-    const caption = item.querySelector('figcaption');
-    
-    lbImg.src = img.src;
-    lbCaption.innerHTML = caption.innerHTML;
+    updateLightboxContent();
     lightbox.classList.add('is-open');
     document.body.style.overflow = 'hidden';
+  };
+
+  const updateLightboxContent = () => {
+    const item = currentGallery[currentIndex];
+    lbImg.src = item.src;
+    lbCaption.innerHTML = item.caption || '';
   };
 
   const closeLightbox = () => {
@@ -248,26 +267,24 @@ if (certificateItems.length > 0 && lightbox) {
 
   const showNext = (e) => {
     if (e) e.stopPropagation();
-    currentIndex = (currentIndex + 1) % certificateItems.length;
-    openLightbox(currentIndex);
+    if (currentGallery.length <= 1) return;
+    currentIndex = (currentIndex + 1) % currentGallery.length;
+    updateLightboxContent();
   };
 
   const showPrev = (e) => {
     if (e) e.stopPropagation();
-    currentIndex = (currentIndex - 1 + certificateItems.length) % certificateItems.length;
-    openLightbox(currentIndex);
+    if (currentGallery.length <= 1) return;
+    currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+    updateLightboxContent();
   };
 
-  certificateItems.forEach((item, index) => {
-    item.addEventListener('click', () => openLightbox(index));
-  });
-
-  btnClose.addEventListener('click', closeLightbox);
-  btnNext.addEventListener('click', showNext);
-  btnPrev.addEventListener('click', showPrev);
+  if (btnClose) btnClose.addEventListener('click', closeLightbox);
+  if (btnNext) btnNext.addEventListener('click', showNext);
+  if (btnPrev) btnPrev.addEventListener('click', showPrev);
 
   lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+    if (e.target === lightbox || (e.target.classList && e.target.classList.contains('lightbox-content'))) {
       closeLightbox();
     }
   });
@@ -277,5 +294,111 @@ if (certificateItems.length > 0 && lightbox) {
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowRight') showNext();
     if (e.key === 'ArrowLeft') showPrev();
+  });
+
+  // Attach to certificates
+  const certificateItems = document.querySelectorAll('.certificate-item');
+  if (certificateItems.length > 0) {
+    const certData = Array.from(certificateItems).map(item => {
+      const img = item.querySelector('img');
+      const figcaption = item.querySelector('figcaption');
+      return {
+        src: img ? img.src : '',
+        caption: figcaption ? figcaption.innerHTML : ''
+      };
+    });
+    certificateItems.forEach((item, index) => {
+      item.addEventListener('click', () => window.openLightbox(certData, index));
+    });
+  }
+}
+
+// Link Modal Logic
+const linkModal = document.getElementById('link-modal');
+if (linkModal) {
+  const linkModalBtn = document.getElementById('link-modal-btn');
+  const linkModalSecondaryBtn = document.getElementById('link-modal-secondary-btn');
+  const linkModalClose = linkModal.querySelector('.link-modal-close');
+  const linkModalOverlay = linkModal.querySelector('.link-modal-overlay');
+
+  const openLinkModal = (url, secondaryUrl) => {
+    linkModalBtn.href = url;
+    if (secondaryUrl) {
+      linkModalSecondaryBtn.href = secondaryUrl;
+      linkModalSecondaryBtn.style.display = 'inline-flex';
+    } else {
+      linkModalSecondaryBtn.style.display = 'none';
+    }
+    linkModal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLinkModal = () => {
+    linkModal.classList.remove('is-open');
+    document.body.style.overflow = '';
+    setTimeout(() => { 
+      if (linkModalBtn) linkModalBtn.href = '#'; 
+      if (linkModalSecondaryBtn) linkModalSecondaryBtn.href = '#';
+    }, 300);
+  };
+
+  document.querySelectorAll('.learnsub-btn, .task-item-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const url = btn.getAttribute('href');
+      const secondaryUrl = btn.getAttribute('data-secondary-url');
+      if (url && url !== '#') {
+        openLinkModal(url, secondaryUrl);
+      }
+    });
+  });
+
+  if (linkModalSecondaryBtn) {
+    linkModalSecondaryBtn.addEventListener('click', (e) => {
+      const href = linkModalSecondaryBtn.getAttribute('href');
+      if (href === '#gallery-phi4') {
+        e.preventDefault();
+        closeLinkModal();
+        if (window.openLightbox) {
+          window.openLightbox([
+            { src: 'source/image/img1.jpg', caption: '<span>Phi-4-Reasoning 14B</span> Image 1' },
+            { src: 'source/image/img2.jpg', caption: '<span>Phi-4-Reasoning 14B</span> Image 2' }
+          ], 0);
+        }
+      } else if (href === '#gallery-wireless') {
+        e.preventDefault();
+        closeLinkModal();
+        if (window.openLightbox) {
+          window.openLightbox([
+            { src: 'source/image/img3.jpg', caption: '<span>Wireless Security Assessment</span> Image 1' },
+            { src: 'source/image/img4.jpg', caption: '<span>Wireless Security Assessment</span> Image 2' },
+            { src: 'source/image/img5.jpg', caption: '<span>Wireless Security Assessment</span> Image 3' },
+            { src: 'source/image/img6.jpg', caption: '<span>Wireless Security Assessment</span> Image 4' },
+            { src: 'source/image/img7.jpg', caption: '<span>Wireless Security Assessment</span> Image 5' },
+            { src: 'source/image/img8.jpg', caption: '<span>Wireless Security Assessment</span> Image 6' }
+          ], 0);
+        }
+      } else if (href === '#gallery-hamster') {
+        e.preventDefault();
+        closeLinkModal();
+        if (window.openLightbox) {
+          window.openLightbox([
+            { src: 'source/image/img9.jpg', caption: '<span>Hamster Object Detection</span> Image 1' },
+            { src: 'source/image/img10.jpg', caption: '<span>Hamster Object Detection</span> Image 2' },
+            { src: 'source/image/img11.jpg', caption: '<span>Hamster Object Detection</span> Image 3' },
+            { src: 'source/image/img12.jpg', caption: '<span>Hamster Object Detection</span> Image 4' }
+          ], 0);
+        }
+      }
+    });
+  }
+
+  if (linkModalClose) linkModalClose.addEventListener('click', closeLinkModal);
+  if (linkModalOverlay) linkModalOverlay.addEventListener('click', closeLinkModal);
+
+  window.addEventListener('keydown', (e) => {
+    if (linkModal.classList.contains('is-open') && e.key === 'Escape') {
+      closeLinkModal();
+    }
   });
 }
