@@ -216,37 +216,20 @@ if (footerCard) {
   footerObserver.observe(footerCard);
 }
 
+document.querySelectorAll('.nav-links a').forEach((anchor) => {
+  anchor.addEventListener('click', (event) => {
+    const target = document.getElementById(anchor.hash.slice(1));
+    if (!target) return;
 
-
-document.querySelectorAll('.nav-links a').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const targetPath = this.getAttribute('href');
-
-    if (!targetPath) return;
-
-    try {
-      const newUrl = targetPath.startsWith('#') ? '/' + targetPath.substring(1) : targetPath;
-      history.pushState(null, null, newUrl);
-    } catch (err) { }
-
-    let targetId = null;
-    if (targetPath.startsWith('#')) {
-      targetId = targetPath.substring(1);
-    } else if (targetPath.startsWith('/')) {
-      targetId = targetPath.substring(1);
-    }
-
-    if (targetId) {
-      const target = document.getElementById(targetId);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+    event.preventDefault();
+    history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+    target.scrollIntoView({ behavior: 'smooth' });
   });
 });
 
-
+if (window.location.hash) {
+  history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+}
 
 // Lightbox Gallery
 const lightbox = document.getElementById('lightbox');

@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@600;700&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
@@ -34,7 +34,10 @@
 
 <body>
   <div id="preloader" class="preloader">
-    <div class="preloader-name">chayharjit</div>
+    <div class="preloader-brand">
+      <img src="materials/logo.png" alt="" class="preloader-logo" />
+      <div class="preloader-name">chayharjit</div>
+    </div>
   </div>
   <canvas id="scroll-canvas" aria-hidden="true"></canvas>
 
@@ -45,28 +48,30 @@
         <span class="wordmark">chayharjit</span>
       </a>
       <div class="nav-links">
-        <a href="/about">About</a>
-        <a href="/projects">Projects</a>
-        <a href="/skills">Skills</a>
-        <a href="/certificates">Certificates</a>
-        <a href="/contact">Contact</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#contact">Contact</a>
       </div>
     </nav>
 
-    <section class="hero-card" aria-labelledby="hero-title">
-      <div class="hero-image" role="img" aria-label="Portrait of Chay Harjit"></div>
-      <video class="hero-video" autoplay loop muted playsinline poster="materials/img1.png" aria-hidden="true">
-        <source src="materials/vid1.mp4" type="video/mp4">
-      </video>
-      <div class="hero-wash"></div>
-      <div class="hero-content">
-        <h1 id="hero-title">Hello, I'm<br /><em>Chay Harjit.</em></h1>
-        <div class="hero-bottom">
-          <p class="role">AI Builder <span>&amp;</span> Ethical Hacker</p>
+    <div class="hero-stage">
+      <section class="hero-card" aria-labelledby="hero-title">
+        <div class="hero-image" role="img" aria-label="Portrait of Chay Harjit"></div>
+        <video class="hero-video" autoplay loop muted playsinline poster="materials/img11.png" aria-hidden="true">
+          <source src="materials/vid1.mp4" type="video/mp4">
+        </video>
+        <div class="hero-wash"></div>
+        <div class="hero-content">
+          <h1 id="hero-title">Hello, I'm<br /><em>Chay Harjit.</em></h1>
+          <div class="hero-bottom">
+            <p class="role">AI Builder <span>&amp;</span> Ethical Hacker</p>
+          </div>
         </div>
-      </div>
 
-    </section>
+      </section>
+    </div>
 
     <section class="about-card" id="about" aria-labelledby="about-title">
       <div class="about-heading">
@@ -550,7 +555,6 @@
       <div class="footer-middle-row">
         <section class="contact-card" id="contact" aria-labelledby="contact-title">
           <div class="contact-heading">
-            <p class="contact-kicker">Get in touch</p>
             <h2 id="contact-title">Contact <em>me.</em></h2>
           </div>
           <div class="contact-links" aria-label="Contact information">
@@ -577,7 +581,10 @@
         </section>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 Chay Harjit. All rights reserved.</p>
+        <div class="footer-legal">
+          <p>Certain materials and content provided herein are developed using artificial intelligence technologies.</p>
+          <p>© 2026 Chay Harjit. All rights reserved.</p>
+        </div>
       </div>
     </footer>
 
