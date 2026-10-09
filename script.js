@@ -174,7 +174,10 @@ function updateProjectsReveal() {
   const skillsEntering = skillsCard.getBoundingClientRect().top < window.innerHeight * 0.6;
   projectsCard.style.setProperty('--reveal', progress.toFixed(3));
   projectsCard.style.setProperty('--project-depth', (progress * 72).toFixed(2) + 'px');
-  projectsCard.style.backgroundColor = `rgb(${Math.round(progress * 255)}, ${Math.round(progress * 255)}, ${Math.round(progress * 255)})`;
+  const red = Math.round(17 + progress * (244 - 17));
+  const green = Math.round(17 + progress * (240 - 17));
+  const blue = Math.round(17 + progress * (236 - 17));
+  projectsCard.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
 
   const heading = projectsCard.querySelector('h2');
   if (heading) {
